@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>about</title>
+</head>
+<body>
+<p th:text="${person.getFio()}">zxc</p>
+<p th:text="${person.getId()}">ads</p>
+<p th:text="${person.getBorn()}">ads</p>
+<br>
+<div>
+    <div th:if="${books.size()>0}">
+        <div th:each="book : ${books}">
+            <p th:text="${book.name}"></p>
+            <p th:text="${book.author}"></p>
+            <p th:text="${book.year}"></p>
+        </div>
+    </div>
+    <div th:unless="${books.size()>0}">
+        <p>Person not yet taken any book</p>
+    </div>
+</div>
+<hr>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+    <input type="submit" value="DELETE"/>
+</form>
+<br>
+<!--REFERENCE TO @PatchMapping update() in the controller-->
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">EDIT</a>
+</body>
+</html>

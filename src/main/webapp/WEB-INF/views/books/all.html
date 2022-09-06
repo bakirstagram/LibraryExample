@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+<table class="striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <div th:each="book : ${books}">
+    <tr>
+        <td><a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getName()}"></a></td>
+    </tr>
+    </div>
+    </tbody>
+</table>
+<br>
+<hr>
+<ul class="pagination" th:if="${books.totalPages > 0}">
+    <li th:each="page : ${numbers}" th:class="${page == books.number} ? active">
+        <a th:href="@{'/books?page=' + ${page}}" th:text="${page + 1}"></a>
+    </li>
+
+</ul>
+
+<a th:href="@{/books/new}">create</a>
+
+</body>
+</html>
